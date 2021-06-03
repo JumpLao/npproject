@@ -1,6 +1,7 @@
 @import (css) url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;600;700&display=swap');
 @import '~antd/dist/antd.less';
 
+@container-width: 980px;
 body, #root {
   height: 100%;
   font-family: 'Kanit', sans-serif;
@@ -36,5 +37,20 @@ body, #root {
   }
   .ant-radio-inner {
     border-color: @primary-color;
+  }
+  .container {
+    width: @container-width;
+    max-width: 100%;
+    margin: auto;
+  }
+  .hero-section {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .section {
+    margin-bottom: 80px;
   }
 }

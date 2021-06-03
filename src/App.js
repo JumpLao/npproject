@@ -5,10 +5,14 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-
 import './App.less';
+import './styles/landing1.less'
+import './styles/landing2.less'
+
 import IdentityContextProvider from './contexts/IdentityContext';
 import HomePage from './pages/HomePage';
+import LandingPage1 from './pages/LandingPage1';
+import LandingPage2 from './pages/LandingPage2';
 
 const App = () => (
   <IdentityContextProvider>
@@ -16,6 +20,12 @@ const App = () => (
       <Switch>
         <Route path="/home">
           <HomePage />
+        </Route>
+        <Route path="/landing1">
+          <LandingPage1 />
+        </Route>
+        <Route path="/landing2">
+          <LandingPage2 />
         </Route>
         <Route>
           <Redirect to="/home" />
