@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Checkbox, Typography, Button, Input, Radio } from 'antd'
+import { Form, Typography, Button, Input, Radio } from 'antd'
 import arrowright from '../images/arrow-right-small.png'
 import { useHistory } from 'react-router';
 const genderoptions = [
