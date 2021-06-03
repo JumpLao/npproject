@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Checkbox, Typography, Button, Skeleton, Result, notification } from 'antd'
 import arrowright from '../images/arrow-right.png'
 import { useHistory } from 'react-router'
 import GoogleSheetDB from '../utils/GoogleSheetDB.js'
-import { useAsync, useEffectOnce } from 'react-use'
+import { useAsync } from 'react-use'
 import { useIdentity } from '../contexts/IdentityContext'
 const options = [
   'มีอายุระหว่าง 18-25 ปี',

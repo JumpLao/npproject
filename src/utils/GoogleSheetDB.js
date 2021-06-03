@@ -1,5 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet'
-import cred from '../npproject-8ee89-d68405269ee2.json'
+import cred from '../service-account.json'
 import _ from 'lodash'
 
 class GoogleSheetDB {
