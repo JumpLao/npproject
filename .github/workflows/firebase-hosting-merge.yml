@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo "${{ secrets.SERVICE_ACCOUNT }}" > src/service-account.json && cat src/service-account.json && yarn && yarn build
+      - run: echo "${{ toJSON(secrets.SERVICE_ACCOUNT) }}" > src/service-account.json && cat src/service-account.json && yarn && yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
