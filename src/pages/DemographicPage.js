@@ -1,7 +1,11 @@
 import React from 'react'
-import { Form, Typography, Button, Input, Radio } from 'antd'
+import { Form, Typography, Button, Input, Radio, notification, Skeleton, Result } from 'antd'
 import arrowright from '../images/arrow-right-small.png'
 import { useHistory } from 'react-router';
+import GoogleSheetDB from '../utils/GoogleSheetDB';
+import { useAsync } from 'react-use';
+import { useIdentity } from '../contexts/IdentityContext';
+const googleSheetDB = new GoogleSheetDB()
 const genderoptions = [
   'หญิง',
   'ชาย',
@@ -14,8 +18,34 @@ const environmentoptions = [
 ]
 const DemographicPage = () => {
   const history = useHistory()
-  const handleSubmit = (formData) => {
+  const {
+    id
+  } = useIdentity()
+  const {
+    loading,
+    error,
+  } = useAsync(() => {
+    return googleSheetDB.auth()
+  })
+  const handleSubmit = async (formData) => {
+    try {
+      await googleSheetDB.save(id, formData)
+      notification.success({
+        message: 'บันทึกข้อมูลสำเร็จ'
+      })
+    } catch (e) {
+      console.log(e)
+      notification.error({
+        message: 'มีข้อผิดพลาดเกิดขึ้น'
+      })
+    }
     history.push('/landing1')
+  }
+  if (loading) {
+    return <Skeleton />
+  }
+  if (error) {
+    return <Result status="error" />
   }
   return (
     <Form onFinish={handleSubmit} layout="vertical">
