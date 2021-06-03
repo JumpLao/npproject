@@ -16,7 +16,7 @@ const HomePage = () => {
             alignItems: 'center'
           }}>
             <div style={{flex: 1}}>
-              <div style={{width: 400, maxWidth: '100%', margin: 'auto', display: 'block'}}>
+              <div style={{width: 400, maxWidth: '100%', margin: 'auto', display: 'block',paddingTop: 40, paddingBottom: 40}}>
                 <Switch>
                   <Route path="/home/consent" exact>
                     <ConsentPage />
@@ -39,27 +39,31 @@ const HomePage = () => {
             display: 'flex',
             alignItems: 'center'
           }}>
-            <div>
-              <p>
-                เว็บไซต์นี้เป็นส่วนหนึ่งในการเก็บข้อมูลงานวิจัย <br/>
-                ของนิสิตระดับปริญญาตรี ชั้นปีที่ 4 <br/>
-                คณะจิตวิทยา จุฬาลงกรณ์มหาวิทยาลัย <br/>
-                <br/>
-                ทั้งนี้ข้อมูลที่เกี่ยวข้องกับผู้เข้าร่วมวิจัย<br/>
-                และคำตอบทั้งหมด จะถูกเก็บเป็นความลับ<br/>
-                หากมีการนำเสนอ ข้อมูลจะถูกนำเสนอในภาพรวมเท่านั้น<br/>
-                โดยข้อมูลใดที่สามารถระบุถึงตัวตนของ<br/>
-                ผู้เข้าร่วมการวิจัยได้จะไม่ปรากฏในรายงานดังกล่าว<br/>
-              </p>
-              <div style={{marginTop: 48}}>
-                <strong>
-                  หากมีข้อสงสัยเพิ่มเติม สามารถติดต่อผู้วิจัยได้ที่
-                </strong>
-                <div style={{display: 'inline-block', marginTop: 8}}>
-                  <img src={authorimg} alt="author" style={{borderRadius: '50%', display: 'inline-block'}}/>
-                  <div style={{textAlign: 'left', paddingLeft: 12, display: 'inline-block'}}>
-                    <strong>สุพิชญา ศรีทองจรัสกุล</strong><br/>
-                    <small>np.supichaya@gmail.com</small>
+            <div style={{flex: 1}}>
+              <div style={{width: 400, maxWidth: '100%', margin: 'auto', display: 'block', paddingTop: 40, paddingBottom: 40}}>
+                <p>
+                  เว็บไซต์นี้เป็นส่วนหนึ่งในการเก็บข้อมูลงานวิจัย <br/>
+                  ของนิสิตระดับปริญญาตรี ชั้นปีที่ 4 <br/>
+                  คณะจิตวิทยา จุฬาลงกรณ์มหาวิทยาลัย <br/>
+                  <br/>
+                  ทั้งนี้ข้อมูลที่เกี่ยวข้องกับผู้เข้าร่วมวิจัย<br/>
+                  และคำตอบทั้งหมด จะถูกเก็บเป็นความลับ<br/>
+                  หากมีการนำเสนอ ข้อมูลจะถูกนำเสนอในภาพรวมเท่านั้น<br/>
+                  โดยข้อมูลใดที่สามารถระบุถึงตัวตนของ<br/>
+                  ผู้เข้าร่วมการวิจัยได้จะไม่ปรากฏในรายงานดังกล่าว<br/>
+                </p>
+                <div style={{marginTop: 48}}>
+                  <div>
+                    <strong>
+                      หากมีข้อสงสัยเพิ่มเติม สามารถติดต่อผู้วิจัยได้ที่
+                    </strong>
+                  </div>
+                  <div style={{display: 'inline-block', marginTop: 8}}>
+                    <img src={authorimg} alt="author" style={{borderRadius: '50%', display: 'inline-block'}}/>
+                    <div style={{textAlign: 'left', paddingLeft: 12, display: 'inline-block'}}>
+                      <strong>สุพิชญา ศรีทองจรัสกุล</strong><br/>
+                      <small>np.supichaya@gmail.com</small>
+                    </div>
                   </div>
                 </div>
               </div>
