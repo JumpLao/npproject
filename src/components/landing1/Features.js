@@ -1,8 +1,9 @@
-import { Col, Row, Typography } from 'antd'
+import { Col, Row } from 'antd'
 import React from 'react'
 import feature1 from '../../images/landing1/feature1.png'
 import feature2 from '../../images/landing1/feature2.png'
 import feature3 from '../../images/landing1/feature3.png'
+import ButtonWithArrow from './ButtonWithArrow'
 import FeatureItem from './FeatureItem'
 const Features = () => {
   return (
@@ -42,6 +43,9 @@ const Features = () => {
             </FeatureItem>
           </Col>
         </Row>
+        <div style={{textAlign: 'center', paddingTop: 40}}>
+          <ButtonWithArrow>ดูคอร์สทั้งหมด</ButtonWithArrow>
+        </div>
       </div>
     </section>
   )

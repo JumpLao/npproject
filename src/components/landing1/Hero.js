@@ -1,7 +1,7 @@
-import { Button, Typography } from 'antd'
+import { Typography } from 'antd'
 import React from 'react'
 import bg from '../../images/landing1/cover.png'
-import arrow from '../../images/landing1/arrow-right.png'
+import ButtonWithArrow from './ButtonWithArrow'
 const Hero = () => {
   return (
     <section className="hero-section section" style={{backgroundImage: `url(${bg})`}}>
@@ -17,7 +17,7 @@ const Hero = () => {
           </Typography.Text>
         </div>
         <div style={{paddingTop: 12}}>
-          <Button type="primary" size="large">เรียนเลย <img src={arrow} alt="arrow" width="16" style={{marginLeft: 8}} /></Button>
+          <ButtonWithArrow>เรียนเลย</ButtonWithArrow>
         </div>
       </div>
     </section>
