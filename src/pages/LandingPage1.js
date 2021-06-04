@@ -9,6 +9,7 @@ import TestSection from '../components/landing1/TestSection'
 import logo from '../images/landing1/logo.png'
 import noti from '../images/landing1/noti.png'
 import account from '../images/landing1/account.png'
+import CourseList from '../components/landing1/CourseList'
 
 const LandingPage1 = () => {
   return (
@@ -54,6 +55,7 @@ const LandingPage1 = () => {
       <Layout.Content style={{overflow: 'auto'}}>
         <Hero />
         <Features />
+        <CourseList />
         <ActivitySection />
         <TestSection />
         <TestimonialSection />

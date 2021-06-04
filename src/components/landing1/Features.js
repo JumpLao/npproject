@@ -43,9 +43,6 @@ const Features = () => {
             </FeatureItem>
           </Col>
         </Row>
-        <div style={{textAlign: 'center', paddingTop: 40}}>
-          <ButtonWithArrow>ดูคอร์สทั้งหมด</ButtonWithArrow>
-        </div>
       </div>
     </section>
   )
