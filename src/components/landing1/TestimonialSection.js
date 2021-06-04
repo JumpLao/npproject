@@ -53,9 +53,16 @@ const TestimonialSection = () => {
                 borderRadius: '50%',
                 border: '2px solid white'
               }}/>
-              <Typography.Text>
-                เป็นเว็บไซต์ที่ดีมาก ๆ เลย ยกให้เป็นแหล่งความรู้เกี่ยวกับจิตวิทยาอันดับหนึ่งของไทยเลย ประทับใจมาก  รอให้เปิดใช้งานเต็มรูปแบบอยู่นะ
-              </Typography.Text>
+              <div style={{textAlign: 'center'}}>
+                <Typography.Text>
+                  เป็นเว็บไซต์ที่ดีมาก ๆ เลย ยกให้เป็นแหล่งความรู้เกี่ยวกับจิตวิทยาอันดับหนึ่งของไทยเลย ประทับใจมาก  รอให้เปิดใช้งานเต็มรูปแบบอยู่นะ
+                </Typography.Text>
+                <div>
+                  <Typography style={{color: '#DA4981'}}>
+                    - Waterbeey
+                  </Typography>
+                </div>
+              </div>
             </div>
             <div style={{textAlign: 'center', paddingTop: 40}}>
               <ButtonWithArrow>
