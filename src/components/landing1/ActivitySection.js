@@ -27,13 +27,13 @@ const ListItem = ({
 } 
 const ActivitySection = () => {
   return (
-    <div class="container" style={{marginBottom: 60}}>
+    <div className="container" style={{marginBottom: 60}}>
       <Row gutter={40}>
         <Col xs={24} lg={12}>
           <img src={activityImg} style={{width: '100%'}} alt="activity"/>
         </Col>
         <Col xs={24} lg={12}>
-          <div style={{paddingBottom: 40}}>
+          <div style={{padding: 40}}>
             <Typography.Title level={2}>
               ตารางกิจกรรม
             </Typography.Title>

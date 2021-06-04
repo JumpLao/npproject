@@ -16,12 +16,12 @@ const TestimonialSection = () => {
           แหล่งเรียนรู้เกี่ยวกับศาสตร์จิตวิทยาโดยนักจิตวิทยา
         </Typography.Text>
       </div>
-      <div class="testimonial-section section" style={{
+      <div className="testimonial-section section" style={{
         backgroundImage: `url(${bg})`,
         display: 'flex',
         alignItems: 'center'
       }}>
-        <div class="container">
+        <div className="container">
           <div>
             <div style={{
               width: 400,
