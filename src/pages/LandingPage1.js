@@ -16,7 +16,7 @@ const LandingPage1 = () => {
       <Layout.Header style={{backgroundColor: 'white'}}>
         <Row justify="space-between">
           <Col>
-            <Row>
+            <Row style={{flexWrap: 'nowrap'}}>
               <Col style={{paddingRight: 40}}>
                 <a href='/'>
                   <img src={logo} alt="logo" />
@@ -28,18 +28,26 @@ const LandingPage1 = () => {
             </Row>
           </Col>
           <Col>
-            <Menu theme="light" mode="horizontal">
-              <Menu.Item key="1">คอร์สเรียน</Menu.Item>
-              <Menu.Item key="2">ตารางกิจกรร</Menu.Item>
-              <Menu.Item key="3">แบบทดสอบ</Menu.Item>
-              <Menu.Item key="4">ระบบวิจัย</Menu.Item>
-              <Menu.Item key="5">
-                <img src={noti} alt="" />
-              </Menu.Item>
-              <Menu.Item key="6">
-                <img src={account} alt="" />
-              </Menu.Item>
-            </Menu>
+            <Row style={{flexWrap: 'nowrap'}}>
+              <Col>
+                <Menu theme="light" mode="horizontal">
+                  <Menu.Item key="1">คอร์สเรียน</Menu.Item>
+                  <Menu.Item key="2">ตารางกิจกรร</Menu.Item>
+                  <Menu.Item key="3">แบบทดสอบ</Menu.Item>
+                  <Menu.Item key="4">ระบบวิจัย</Menu.Item>
+                </Menu>
+              </Col>
+              <Col>
+                <Menu theme="light" mode="horizontal">
+                  <Menu.Item key="5">
+                    <img src={noti} alt="" />
+                  </Menu.Item>
+                  <Menu.Item key="6">
+                    <img src={account} alt="" />
+                  </Menu.Item>
+                </Menu>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Layout.Header>
