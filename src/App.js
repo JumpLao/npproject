@@ -11,7 +11,7 @@ import './styles/landing2.less'
 
 import IdentityContextProvider from './contexts/IdentityContext';
 import HomePage from './pages/HomePage';
-import LandingPage1 from './pages/LandingPage1';
+import LandingPage1 from './pages/landing1/Layout';
 import LandingPage2 from './pages/LandingPage2';
 
 const App = () => (

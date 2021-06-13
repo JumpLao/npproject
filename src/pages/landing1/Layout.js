@@ -1,17 +1,16 @@
 import { Col, Layout, Menu, Row } from 'antd'
 import Search from 'antd/lib/input/Search'
 import React from 'react'
-import ActivitySection from '../components/landing1/ActivitySection'
-import Features from '../components/landing1/Features'
-import Hero from '../components/landing1/Hero'
-import TestimonialSection from '../components/landing1/TestimonialSection'
-import TestSection from '../components/landing1/TestSection'
-import logo from '../images/landing1/logo.png'
-import noti from '../images/landing1/noti.png'
-import account from '../images/landing1/account.png'
-import CourseList from '../components/landing1/CourseList'
+import logo from '../../images/landing1/logo.png'
+import noti from '../../images/landing1/noti.png'
+import account from '../../images/landing1/account.png'
+import { Route, Switch, useRouteMatch } from 'react-router'
+import Home from './Home'
+import Course from './Course'
+import CourseDetail from './CourseDetail'
 
-const LandingPage1 = () => {
+const LandingPage = () => {
+  const route = useRouteMatch()
   return (
     <Layout style={{height: '100%', backgroundColor: 'white'}} id="landing1">
       <Layout.Header style={{backgroundColor: 'white'}}>
@@ -53,12 +52,17 @@ const LandingPage1 = () => {
         </Row>
       </Layout.Header>
       <Layout.Content style={{overflow: 'auto'}}>
-        <Hero />
-        <Features />
-        <CourseList />
-        <ActivitySection />
-        <TestSection />
-        <TestimonialSection />
+        <Switch>
+          <Route path={`${route.path}/courses`} exact>
+            <Course />
+          </Route>
+          <Route path={`${route.path}/courses/:id`} exact>
+            <CourseDetail />
+          </Route>
+          <Route>
+            <Home />
+          </Route>
+        </Switch>
         <Layout.Footer style={{backgroundColor: 'white'}}>
           <div style={{textAlign:' center', borderBottom: '1px solid black', paddingBottom: 20}}>
             <img width="160" src={logo} alt="logo"/>
@@ -74,4 +78,4 @@ const LandingPage1 = () => {
   )
 }
 
-export default LandingPage1
+export default LandingPage
