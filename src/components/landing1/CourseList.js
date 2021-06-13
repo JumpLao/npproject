@@ -49,7 +49,7 @@ export const courses = [
 
 const CourseList = () => {
   return (
-    <div className="section">
+    <div className="section course-section">
       <div className="container">
         <div style={{textAlign: 'center', paddingBottom: 32}}>
           <Typography.Title level={3}>

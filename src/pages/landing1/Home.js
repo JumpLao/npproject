@@ -6,15 +6,17 @@ import Hero from '../../components/landing1/Hero'
 import TestimonialSection from '../../components/landing1/TestimonialSection'
 import TestSection from '../../components/landing1/TestSection'
 
-const Home = () => {
+const Home = ({
+  theme
+}) => {
   return (
     <React.Fragment>
-      <Hero />
-      <Features />
-      <CourseList />
-      <ActivitySection />
-      <TestSection />
-      <TestimonialSection />
+      <Hero theme={theme}/>
+      <Features theme={theme}/>
+      <CourseList theme={theme}/>
+      <ActivitySection theme={theme}/>
+      <TestSection theme={theme}/>
+      <TestimonialSection theme={theme}/>
     </React.Fragment>
   )
 }

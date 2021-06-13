@@ -1,1 +1,81 @@
+@import (css) url('https://fonts.googleapis.com/css2?family=Maitree:wght@200;400;600;700&display=swap');
+@landing2-primary-color: #DA4981;
 
+#landing2 {
+  .hero-section {
+    background-position: bottom;
+    .ant-typography {
+      color: white;
+      span {
+        color: white !important;
+      }
+    }
+    .ant-btn-primary {
+      background: linear-gradient(180deg, #FFFFFF 0%, #B3FF84 100%);
+      /* Button Green Shadow */
+
+      box-shadow: 0px 10px 22px rgba(84, 240, 90, 0.3);
+      border-radius: 12px;
+      border-color: transparent;
+      color: #0D8B30;
+      img {
+        content: url(../images/landing2/Vector.png)
+      }
+    }
+  }
+  .themed-header {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    .ant-input-search {
+      background-color: transparent;
+      border-radius: 18px;
+      input {
+        background-color: transparent;
+        color: white;
+        &::placeholder {
+          color:white;
+        }
+      }
+      .ant-input-search-icon {
+        color: white;
+        &::before{
+          border-left:none;
+        }
+      }
+    }
+  }
+  .themed-menu{
+    background-color: transparent;
+    border-bottom: none;
+    color: white;
+  }
+  .course-list-item {
+    text-align: left !important;
+    border-radius: 12px !important;
+    img {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+  }
+  .ant-btn-primary {
+    background: linear-gradient(180deg, #FFBBD3 0%, #FB92BA 17.19%, #D2437A 100%);
+    border-radius: 12px;
+    color: white;
+    border-color: transparent;
+  }
+  .course-section {
+    background-image: url('../images/landing2/coursebg.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    padding-bottom: 300px;
+    margin-bottom: 0px;
+  }
+  .activity-section {
+    .activity-img {
+      content: url('../images/landing2/activity.png');
+    }
+  }
+}

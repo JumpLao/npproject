@@ -27,10 +27,10 @@ const ListItem = ({
 } 
 const ActivitySection = () => {
   return (
-    <div className="container" style={{marginBottom: 60}}>
+    <div className="container activity-section" style={{marginBottom: 60}}>
       <Row gutter={40}>
         <Col xs={24} lg={12}>
-          <img src={activityImg} style={{width: '100%'}} alt="activity"/>
+          <img className="activity-img" src={activityImg} style={{width: '100%'}} alt="activity"/>
         </Col>
         <Col xs={24} lg={12}>
           <div style={{padding: 40}}>

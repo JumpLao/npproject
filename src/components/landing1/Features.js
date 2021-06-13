@@ -1,10 +1,18 @@
 import { Col, Row } from 'antd'
 import React from 'react'
-import feature1 from '../../images/landing1/feature1.png'
-import feature2 from '../../images/landing1/feature2.png'
-import feature3 from '../../images/landing1/feature3.png'
+import _feature1 from '../../images/landing1/feature1.png'
+import _feature2 from '../../images/landing1/feature2.png'
+import _feature3 from '../../images/landing1/feature3.png'
+import feature1_2 from '../../images/landing2/Block 1/icon.png'
+import feature2_2 from '../../images/landing2/Block 2/icon.png'
+import feature3_2 from '../../images/landing2/Block 3/icon.png'
 import FeatureItem from './FeatureItem'
-const Features = () => {
+const Features = ({
+  theme
+}) => {
+  const feature1 = theme === 'landing1' ? _feature1 : feature1_2
+  const feature2 = theme === 'landing1' ? _feature2 : feature2_2
+  const feature3 = theme === 'landing1' ? _feature3 : feature3_2
   return (
     <section className="section">
       <div className="container">

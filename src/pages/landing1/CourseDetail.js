@@ -13,7 +13,13 @@ import YouTube from 'react-youtube'
 import { useAsync, useInterval } from 'react-use'
 import PopUpQuiz from '../../components/landing1/PopUpQuiz'
 import GoogleSheetDB from '../../utils/GoogleSheetDB'
+import RewardModal from '../../components/landing1/RewardModal'
+import EndTestModal from '../../components/landing1/EndTestModal'
 const googleSheetDB = new GoogleSheetDB()
+export const REWARD_MODE = {
+  PER_QUIZ: 'per quiz',
+  PER_QUESTION: 'per question'
+}
 const quizes = [
   {
     id: 1,
@@ -37,6 +43,7 @@ const quizes = [
       'ต้องคำนึงว่าเป็นประโยชน์ต่อคนอื่นหรือไม่ หากไม่เป็น ประโยชน์แต่เรารัก ก็ไม่ถือว่าเป็น meaning in life'
     ],
     time: 8*60 + 30
+    // time: 0
   },
   {
     id: 3,
@@ -48,6 +55,7 @@ const quizes = [
       'ทักษะความสามารถในการแก้ปัญหา (I can)'
     ],
     time: 11*60 + 37
+    // time: 0
   },
   {
     id: 4,
@@ -59,6 +67,7 @@ const quizes = [
       'ช่วยให้เรายังยืนหยัดและแน่วแน่ในการทำตามเป้าหมายได้แม้ในวันที่เหนื่อย'
     ],
     time: 17*60 + 29
+    // time: 0
   },
   {
     id: 5,
@@ -70,13 +79,17 @@ const quizes = [
       'เมื่อตระหนักถึงคุณค่าและความหมายของการมีชีวิตอยู่ (meaning in life) แม้จะเจอความยากลำบากเพียงใด ก็จะสามารถพาตัวเองกลับมาสู่ภาวะปกติเพื่อเดินหน้าต่อไปได้'
     ],
     time: 20*60 + 18
+    // time: 0
   },
 ]
 
 const CourseDetail = () => {
   const [player, setplayer] = useState()
   const [nextQuiz, setnextQuiz] = useState(0)
+  const [rewardMode, ] = useState(REWARD_MODE.PER_QUESTION)
   const popUpQuizRef = useRef()
+  const rewardModalRef = useRef()
+  const endTestModalRef = useRef()
   const {
     loading,
     error,
@@ -90,10 +103,16 @@ const CourseDetail = () => {
     // check time played
     const currentTime = player.getCurrentTime()
     console.log(currentTime)
+    // if (currentTime >= nextQuiz + 1) {
     if (currentTime >= quizes[nextQuiz].time) {
       if (nextQuiz > quizes.length - 1) {
         // end quiz
         // open finish quiz modal
+        if (rewardMode === REWARD_MODE.PER_QUIZ){
+          showRewardModal()
+          return
+        }
+        showEndTestModal()
         return
       }
       // open quiz modal with next quiz
@@ -104,6 +123,12 @@ const CourseDetail = () => {
   }, 1000)
   const openModal = (quiz) => {
     popUpQuizRef.current.open(quiz)
+  }
+  const showRewardModal = () => {
+    rewardModalRef.current.open()
+  }
+  const showEndTestModal = () => {
+    endTestModalRef.current.open()
   }
   const handlePlayerReady = (event) => {
     const player = event.target
@@ -166,7 +191,7 @@ const CourseDetail = () => {
         <Col xs={24} sm={16}>
           <YouTube
             containerClassName={'youtubeContainer'}
-            videoId="mwGCF5-yILA"
+            videoId="uj6gYQhceg8"
             opts={{
               // height: '390',
               // width: '640',
@@ -243,7 +268,9 @@ const CourseDetail = () => {
           })
         }
       </Row>
-      <PopUpQuiz ref={popUpQuizRef} player={player} className={'landing1-theme'} googleSheetDB={googleSheetDB}/>
+      <PopUpQuiz ref={popUpQuizRef} player={player} className={'landing1-theme'} googleSheetDB={googleSheetDB} rewardMode={rewardMode} showRewardModal={showRewardModal}/>
+      <RewardModal ref={rewardModalRef} player={player} className={'landing1-theme'} showEndTestModal={showEndTestModal} rewardMode={rewardMode} />
+      <EndTestModal ref={endTestModalRef} />
     </div>
   )
 }

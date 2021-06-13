@@ -19,6 +19,7 @@ const CourseListItem = ({
     <Link to={link ? `${route.path}/${link}` : undefined}>
       <Card
         hoverable
+        className="course-list-item"
         style={{ width: '100%', textAlign: 'center' }}
         cover={(
           <div style={{position: 'relative'}}>

@@ -1,25 +1,54 @@
-import { Col, Layout, Menu, Row } from 'antd'
+import { Col, Layout, Menu, Result, Row, Skeleton } from 'antd'
 import Search from 'antd/lib/input/Search'
 import React from 'react'
 import logo from '../../images/landing1/logo.png'
+import logo2 from '../../images/landing2/logo.png'
 import noti from '../../images/landing1/noti.png'
 import account from '../../images/landing1/account.png'
 import { Route, Switch, useRouteMatch } from 'react-router'
 import Home from './Home'
 import Course from './Course'
 import CourseDetail from './CourseDetail'
-
+import { useAsync } from 'react-use'
+import GoogleSheetDB from '../../utils/GoogleSheetDB'
+import { useIdentity } from '../../contexts/IdentityContext'
+import { getTheme } from '../../utils/ABTestingManager'
+const googleSheetDB = new GoogleSheetDB()
 const LandingPage = () => {
+  const {
+    id
+  } = useIdentity()
+  const {
+    loading,
+    error,
+  } = useAsync(() => {
+    return googleSheetDB.auth()
+  })
+  const {
+    loading: themeLoading,
+    error: themeError,
+    value: theme
+  } = useAsync(async () => {
+    const rowIndex = await googleSheetDB.getRowIndex(id)
+    return getTheme(rowIndex)
+  })
   const route = useRouteMatch()
+  if (loading || themeLoading) {
+    return <Skeleton />
+  }
+  if (error || themeError) {
+    return <Result status="error" />
+  }
+  debugger
   return (
-    <Layout style={{height: '100%', backgroundColor: 'white'}} id="landing1">
-      <Layout.Header style={{backgroundColor: 'white'}}>
+    <Layout style={{height: '100%', backgroundColor: 'white'}} id={theme}>
+      <Layout.Header className="themed-header" >
         <Row justify="space-between">
           <Col>
             <Row style={{flexWrap: 'nowrap'}}>
               <Col style={{paddingRight: 40}}>
                 <a href='/'>
-                  <img src={logo} alt="logo" />
+                  <img src={theme === 'landing1' ? logo : logo2} alt="logo" />
                 </a>
               </Col>
               <Col>
@@ -30,7 +59,7 @@ const LandingPage = () => {
           <Col>
             <Row style={{flexWrap: 'nowrap'}}>
               <Col>
-                <Menu theme="light" mode="horizontal">
+                <Menu className="themed-menu" theme="light" mode="horizontal">
                   <Menu.Item key="1">คอร์สเรียน</Menu.Item>
                   <Menu.Item key="2">ตารางกิจกรร</Menu.Item>
                   <Menu.Item key="3">แบบทดสอบ</Menu.Item>
@@ -38,7 +67,7 @@ const LandingPage = () => {
                 </Menu>
               </Col>
               <Col>
-                <Menu theme="light" mode="horizontal">
+                <Menu className="themed-menu" theme="light" mode="horizontal">
                   <Menu.Item key="5">
                     <img src={noti} alt="" />
                   </Menu.Item>
@@ -60,7 +89,7 @@ const LandingPage = () => {
             <CourseDetail />
           </Route>
           <Route>
-            <Home />
+            <Home theme={theme} />
           </Route>
         </Switch>
         <Layout.Footer style={{backgroundColor: 'white'}}>

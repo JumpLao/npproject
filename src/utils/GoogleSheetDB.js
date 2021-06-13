@@ -17,7 +17,6 @@ class GoogleSheetDB {
     return sheet.addRow(payload)
   }
   async save(id, payload) {
-    debugger
     await this.doc.loadInfo();
     const sheet = this.doc.sheetsByIndex[0]
     const rows = await sheet.getRows();
@@ -32,6 +31,13 @@ class GoogleSheetDB {
       _.extend(row, payload)
       return row.save()
     }
+  }
+  async getRowIndex(id) {
+    await this.doc.loadInfo();
+    const sheet = this.doc.sheetsByIndex[0]
+    const rows = await sheet.getRows();
+    let row = _.find(rows, { id });
+    return row.rowIndex
   }
 }
 

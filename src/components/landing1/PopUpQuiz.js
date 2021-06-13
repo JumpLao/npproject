@@ -3,10 +3,13 @@ import { Form } from 'antd'
 import _ from 'lodash'
 import React, { useImperativeHandle, useState } from 'react'
 import { useIdentity } from '../../contexts/IdentityContext'
+import { REWARD_MODE } from '../../pages/landing1/CourseDetail'
 const PopUpQuiz = ({
   className,
   googleSheetDB,
-  player
+  player,
+  rewardMode,
+  showRewardModal
 }, ref) => {
   const [visible, setvisible] = useState(false)
   const [quiz, setquiz] = useState()
@@ -29,6 +32,11 @@ const PopUpQuiz = ({
       notification.success({
         message: 'บันทึกข้อมูลเรียบร้อย'
       })
+      if (rewardMode === REWARD_MODE.PER_QUESTION) {
+        setvisible(false)
+        showRewardModal()
+        return
+      }
       setvisible(false)
       player.playVideo()
       return
