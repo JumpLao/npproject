@@ -7,7 +7,6 @@ import starActivated from '../../images/landing1/star_activated.png'
 import lecturer from '../../images/landing1/lecturer.png'
 import errorImg from '../../images/landing1/error.png'
 import download from '../../images/landing1/download.png'
-import { Link } from 'react-router-dom'
 import { courses } from '../../components/landing1/CourseList'
 import CourseListItem from '../../components/landing1/CourseListItem'
 import YouTube from 'react-youtube'
@@ -76,7 +75,6 @@ const quizes = [
 
 const CourseDetail = () => {
   const [player, setplayer] = useState()
-  const [timeplayed, settimeplayed] = useState(0)
   const [nextQuiz, setnextQuiz] = useState(0)
   const popUpQuizRef = useRef()
   const {
@@ -182,7 +180,7 @@ const CourseDetail = () => {
         <Col xs={24} sm={8}>
           <Collapse>
             <Collapse.Panel header="ทำยังไงในวันที่ใจเหนื่อย">
-              <a href="https://drive.google.com/file/d/1cQISqGVf-7cYRxKNrkFRx8nV-GDuXahD/view?usp=sharing" target="_blank">
+              <a href="https://drive.google.com/file/d/1cQISqGVf-7cYRxKNrkFRx8nV-GDuXahD/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <Row>
                   <img src={download} alt="download" />
                   <Typography.Text style={{paddingLeft: 12}}>
