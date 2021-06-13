@@ -7,8 +7,9 @@ import course3img from '../../images/landing1/childpersontality.png'
 import course4img from '../../images/landing1/adolescent.png'
 import CourseListItem from './CourseListItem'
 
-const courses = [
+export const courses = [
   {
+    id: 1,
     title: 'ทำยังไงในวันที่ใจเหนื่อย',
     description: 'ในยุคที่วิกฤตการณ์ต่าง ๆ ถาโถมเข้ามาแบบที่ตั้งตัวแทบจะไม่ทัน ...',
     price: 0,
@@ -18,6 +19,7 @@ const courses = [
     link: 'courses/1'
   },
   {
+    id: 2,
     title: 'การปรับพฤติกรรม',
     description: 'การจัดการวางเงื่อนไขพฤติกรรม การเรียนรู้จากตัวแบบ การใช้ทฤษฎี ...',
     price: 1500,
@@ -26,6 +28,7 @@ const courses = [
     locked: true
   },
   {
+    id: 3,
     title: 'บุคลิกภาพเด็ก',
     description: 'ความหมายของบุคลิกภาพ สิ่งที่มี อิทธิพลต่อพัฒนาการทางบุคลิก ...',
     price: 1200,
@@ -34,6 +37,7 @@ const courses = [
     locked: true
   },
   {
+    id: 4,
     title: 'จิตวิทยาวัยรุ่น',
     description: 'พัฒนาการของบุคคลและความสัมพันธ์ระหว่างบุคคลในระยะวัยรุ่นตอนต้น ...',
     price: 1200,

@@ -8,6 +8,8 @@ import lecturer from '../../images/landing1/lecturer.png'
 import errorImg from '../../images/landing1/error.png'
 import download from '../../images/landing1/download.png'
 import { Link } from 'react-router-dom'
+import { courses } from '../../components/landing1/CourseList'
+import CourseListItem from '../../components/landing1/CourseListItem'
 
 const CourseDetail = () => {
   return (
@@ -118,6 +120,20 @@ const CourseDetail = () => {
         <Result icon={<img width="120" src={errorImg} alt="error" />} title="พบกับฟีเจอร์ห้องสนทนาได้ในเร็ว ๆ นี้" />
         </Tabs.TabPane>
       </Tabs>
+      <Typography.Title level={3}>
+        คอร์สแนะนำ
+      </Typography.Title>
+      <Row gutter="24">
+        {
+          courses.filter(f => [3,4].indexOf(f.id) !== -1).map(course => {
+            return (
+              <Col xs={12} md={8} lg={6}>
+                <CourseListItem image={course.image} title={course.title} description={course.description} price={course.price} favorited={course.favorited} locked={course.locked} link={course.link}/>
+              </Col>
+            )
+          })
+        }
+      </Row>
     </div>
   )
 }
