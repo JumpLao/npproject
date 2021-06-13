@@ -165,10 +165,11 @@ const CourseDetail = () => {
       <Row style={{marginTop: 24}} gutter={24}>
         <Col xs={24} sm={16}>
           <YouTube
+            containerClassName={'youtubeContainer'}
             videoId="mwGCF5-yILA"
             opts={{
-              height: '390',
-              width: '640',
+              // height: '390',
+              // width: '640',
               playerVars: {
                 // https://developers.google.com/youtube/player_parameters
                 autoplay: 0,
@@ -178,8 +179,8 @@ const CourseDetail = () => {
           />
         </Col>
         <Col xs={24} sm={8}>
-          <Collapse>
-            <Collapse.Panel header="ทำยังไงในวันที่ใจเหนื่อย">
+          <Collapse activeKey={1}>
+            <Collapse.Panel header="ทำยังไงในวันที่ใจเหนื่อย" key={1}>
               <a href="https://drive.google.com/file/d/1cQISqGVf-7cYRxKNrkFRx8nV-GDuXahD/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                 <Row>
                   <img src={download} alt="download" />
