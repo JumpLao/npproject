@@ -3,7 +3,6 @@ import React from 'react'
 import feature1 from '../../images/landing1/feature1.png'
 import feature2 from '../../images/landing1/feature2.png'
 import feature3 from '../../images/landing1/feature3.png'
-import ButtonWithArrow from './ButtonWithArrow'
 import FeatureItem from './FeatureItem'
 const Features = () => {
   return (
