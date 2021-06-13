@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./decrypt_service_account.sh && cat src/service-account.json && yarn && yarn build
+      - run: ./decrypt_service_account.sh && echo $SERVICE_ACCOUNT_PASSPHRASE  && yarn && yarn build
         env:
           SERVICE_ACCOUNT_PASSPHRASE: ${{ secrets.SERVICE_ACCOUNT_PASSPHRASE }}
           REACT_APP_GOOGLESHEET_ID: 1jIfUczkVFALXCg8ywdKqFvQ9KeQUg1lir8c5Kf5CxYU
