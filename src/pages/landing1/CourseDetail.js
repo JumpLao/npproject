@@ -1,5 +1,5 @@
-import { Breadcrumb, Button, Col, Collapse, Result, Row, Tabs, Typography } from 'antd'
-import React from 'react'
+import { Breadcrumb, Button, Col, Collapse, Result, Row, Skeleton, Tabs, Typography } from 'antd'
+import React, { useRef, useState } from 'react'
 import star from '../../images/landing1/star_border.png'
 import network from '../../images/landing1/account_tree.png'
 import computer from '../../images/landing1/card_membership.png'
@@ -10,8 +10,113 @@ import download from '../../images/landing1/download.png'
 import { Link } from 'react-router-dom'
 import { courses } from '../../components/landing1/CourseList'
 import CourseListItem from '../../components/landing1/CourseListItem'
+import YouTube from 'react-youtube'
+import { useAsync, useInterval } from 'react-use'
+import PopUpQuiz from '../../components/landing1/PopUpQuiz'
+import GoogleSheetDB from '../../utils/GoogleSheetDB'
+const googleSheetDB = new GoogleSheetDB()
+const quizes = [
+  {
+    id: 1,
+    question: () => (<span>ข้อใด <em>ไม่ใช่</em> องค์ประกอบของ Resilience ?</span>),
+    choices: [
+      'แหล่งสนับสนุนและทรัพยากรภายนอก (I have)',
+      'การมีจิตใจที่เข้มแข็ง (I am)',
+      'ความเชื่อมั่นในการเปลี่ยนแปลงและโอกาส (I will)',
+      'ทักษะความสามารถในการแก้ปัญหา (I can)'
+    ],
+    time: 6*60
+    // time: 0
+  },
+  {
+    id: 2,
+    question: () => (<span>ข้อใด <em>กล่าวถูกต้อง</em> เกี่ยวกับ Meaning in life ?</span>),
+    choices: [
+      'เป็นองค์ประกอบหนึ่งทางจิตวิทยาเป็นความสามารถที่จะยืนหยัดทำเป้าหมายของชีวิต',
+      'ช่วยส่งเสริมอารมณ์เชิงบวกมากขึ้น ป้องกันภาวะซึมเศร้าได้ และทำให้มีความแข็งแกร่งไม่ย่อท้อต่ออุปสรรคมากขึ้น',
+      'เป็นการตระหนักรู้ถึงปัจจุบันขณะของชีวิตและความหมายของการเปลี่ยนแปลงในชีวิต',
+      'ต้องคำนึงว่าเป็นประโยชน์ต่อคนอื่นหรือไม่ หากไม่เป็น ประโยชน์แต่เรารัก ก็ไม่ถือว่าเป็น meaning in life'
+    ],
+    time: 8*60 + 30
+  },
+  {
+    id: 3,
+    question: () => (<span>ข้อใด <em>กล่าวผิด</em> เกี่ยวกับ Mindfulness ?</span>),
+    choices: [
+      'หลักการพื้นฐานของการฝึกให้มี mindfulness คือ ฝึกสังเกตการเปลี่ยนแปลงที่เกิดขึ้นกับร่างกาย และฝึกเพ่งความสนใจไปที่สิ่งสิ่งนั้น',
+      'เป็นความสามารถในการรับรู้ตนเองในปัจจุบันขณะหรือการมีสติ',
+      'ความเชื่อมั่นในการเปลี่ยนแปลงและโอกาส (I will)',
+      'ทักษะความสามารถในการแก้ปัญหา (I can)'
+    ],
+    time: 11*60 + 37
+  },
+  {
+    id: 4,
+    question: () => (<span>ในวันที่ใจเหนื่อย Grit ช่วยให้เราเป็นอย่างไร ?</span>),
+    choices: [
+      'ช่วยให้เรารู้ถึงการเปลี่ยนแปลงของอารมณ์ความรู้สึกเหนื่อย ๆ ของตัวเองได้รวดเร็วและแก้ไขสถานการณ์ได้อย่างทันถ่วงที',
+      'ช่วยให้เรายอมรับและเข้าใจในสิ่งที่ตัวเองเป็นแม้ในวันที่เหนื่อย ผิดพลาด หรือเกิดความทุกข์',
+      'ช่วยให้เราตระหนักถึงคุณค่าของสิ่งที่มีสิ่งอื่น ๆ นอกเหนือจากความเหนื่อยหรือความทุกข์',
+      'ช่วยให้เรายังยืนหยัดและแน่วแน่ในการทำตามเป้าหมายได้แม้ในวันที่เหนื่อย'
+    ],
+    time: 17*60 + 29
+  },
+  {
+    id: 5,
+    question: () => (<span>ข้อใด <em>กล่าวผิด</em> เกี่ยวกับองค์ประกอบทางจิตวิทยาที่มีส่วนช่วยในการฟื้นคืนกลับสู่สมดุล (Resilience) จากวันที่ใจเหนื่อยได้ ?</span>),
+    choices: [
+      'เมื่อตระหนักถึงคุณค่าของสิ่งอื่น ๆ ที่ตนเองมีอยู่ (gratitude) จะทำให้บุคคลเกิดความผูกพันกับสิ่งเหล่านั้นและจะยืนหยัดในการรักษาสิ่งเหล่านั้นไว้อย่างไม่ย่อท้อ',
+      'เมื่อมีสติ (mindfulness) ก็จะช่วยให้บุคคลรับรู้อารมณ์และ ประเด็นปัญหาได้อย่างรวดเร็วและสามารถใช้ความเข้าใจที่มียอมรับเรื่องราวที่เกิดขึ้นได้อย่างรวดเร็ว',
+      'เมื่อเกิดความกรุณาต่อตนเองในใจขึ้น (self-compassion) จะเกิดการฟื้นคืนและอนุญาตให้ตัวเองลุกขึ้นมาแก้ไขให้ทุกสิ่งดีขึ้นกว่าที่เคยเป็น',
+      'เมื่อตระหนักถึงคุณค่าและความหมายของการมีชีวิตอยู่ (meaning in life) แม้จะเจอความยากลำบากเพียงใด ก็จะสามารถพาตัวเองกลับมาสู่ภาวะปกติเพื่อเดินหน้าต่อไปได้'
+    ],
+    time: 20*60 + 18
+  },
+]
 
 const CourseDetail = () => {
+  const [player, setplayer] = useState()
+  const [timeplayed, settimeplayed] = useState(0)
+  const [nextQuiz, setnextQuiz] = useState(0)
+  const popUpQuizRef = useRef()
+  const {
+    loading,
+    error,
+  } = useAsync(() => {
+    return googleSheetDB.auth()
+  })
+  useInterval(() => {
+    if (!player) {
+      return
+    }
+    // check time played
+    const currentTime = player.getCurrentTime()
+    console.log(currentTime)
+    if (currentTime >= quizes[nextQuiz].time) {
+      if (nextQuiz > quizes.length - 1) {
+        // end quiz
+        // open finish quiz modal
+        return
+      }
+      // open quiz modal with next quiz
+      player.pauseVideo()
+      openModal(quizes[nextQuiz])
+      setnextQuiz((nextQuiz) => nextQuiz + 1)
+    }
+  }, 1000)
+  const openModal = (quiz) => {
+    popUpQuizRef.current.open(quiz)
+  }
+  const handlePlayerReady = (event) => {
+    const player = event.target
+    setplayer(player)
+  }
+  if (loading) {
+    return <Skeleton />
+  }
+  if (error) {
+    return <Result status="error" title={error.message} />
+  }
   return (
     <div class="container">
       <Breadcrumb>
@@ -59,15 +164,20 @@ const CourseDetail = () => {
           4.5/5 (19 รีวิว)
         </Typography.Text>
       </Row>
-      <Row style={{marginTop: 24}}>
+      <Row style={{marginTop: 24}} gutter={24}>
         <Col xs={24} sm={16}>
-          <div style={{width: '100%', paddingTop: '56.5%', position: 'relative'}}>
-            <iframe
-              title="letslearn"
-              src="https://drive.google.com/file/d/16sj_ai0ywHKbDcBtFWeTAkJsEkZbzt_0/preview?start=1"
-              style={{width: '100%', height: '100%', position: 'absolute', top: 0, left: 0}}
-            ></iframe>
-          </div>
+          <YouTube
+            videoId="mwGCF5-yILA"
+            opts={{
+              height: '390',
+              width: '640',
+              playerVars: {
+                // https://developers.google.com/youtube/player_parameters
+                autoplay: 0,
+              }
+            }}
+            onReady={handlePlayerReady}
+          />
         </Col>
         <Col xs={24} sm={8}>
           <Collapse>
@@ -134,6 +244,7 @@ const CourseDetail = () => {
           })
         }
       </Row>
+      <PopUpQuiz ref={popUpQuizRef} player={player} className={'landing1-theme'} googleSheetDB={googleSheetDB}/>
     </div>
   )
 }
