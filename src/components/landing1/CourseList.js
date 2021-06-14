@@ -6,6 +6,7 @@ import course2img from '../../images/landing1/behaviormodification.png'
 import course3img from '../../images/landing1/childpersontality.png'
 import course4img from '../../images/landing1/adolescent.png'
 import CourseListItem from './CourseListItem'
+import { useHistory } from 'react-router'
 
 export const courses = [
   {
@@ -48,6 +49,10 @@ export const courses = [
 ]
 
 const CourseList = () => {
+  const history = useHistory()
+  const handleViewAll = () => {
+    return history.push('/landing1/courses')
+  }
   return (
     <div className="section course-section">
       <div className="container">
@@ -69,7 +74,7 @@ const CourseList = () => {
         </Row>
       </div>
       <div style={{textAlign: 'center', paddingTop: 40}}>
-        <ButtonWithArrow>ดูคอร์สทั้งหมด</ButtonWithArrow>
+        <ButtonWithArrow onClick={handleViewAll}>ดูคอร์สทั้งหมด</ButtonWithArrow>
       </div>
     </div>
   )
