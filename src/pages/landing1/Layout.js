@@ -13,9 +13,12 @@ import { useAsync, useLocation } from 'react-use'
 import GoogleSheetDB from '../../utils/GoogleSheetDB'
 import { useIdentity } from '../../contexts/IdentityContext'
 import { getTheme } from '../../utils/ABTestingManager'
+import qs from 'qs'
+
 const googleSheetDB = new GoogleSheetDB()
 const LandingPage = () => {
   const location = useLocation()
+  
   const {
     id
   } = useIdentity()
@@ -30,6 +33,14 @@ const LandingPage = () => {
     error: themeError,
     value: theme
   } = useAsync(async () => {
+    const {
+      theme
+    } = qs.parse(location.search, {
+      ignoreQueryPrefix: true
+    })
+    if (['landing1', 'landing2'].indexOf(theme) !== -1){
+      return theme
+    }
     const rowIndex = await googleSheetDB.getRowIndex(id)
     return getTheme(rowIndex)
   }, [loading])
@@ -54,7 +65,7 @@ const LandingPage = () => {
           <Col>
             <Row style={{flexWrap: 'nowrap'}}>
               <Col style={{paddingRight: 40}}>
-                <a href='/'>
+                <a href='/landing1'>
                   <img src={theme === 'landing1' ? logo : logo2} alt="logo" />
                 </a>
               </Col>
