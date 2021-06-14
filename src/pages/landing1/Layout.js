@@ -43,7 +43,13 @@ const LandingPage = () => {
   debugger
   return (
     <Layout style={{height: '100%', backgroundColor: 'white'}} id={theme}>
-      <Layout.Header className="themed-header" >
+      <Layout.Header
+        style={{zIndex: 1}}
+        className={{
+          'themed-header': true,
+          home: location.pathname === '/landing1' || location.pathname === '/landing1/'
+        }}
+      >
         <Row justify="space-between">
           <Col>
             <Row style={{flexWrap: 'nowrap'}}>

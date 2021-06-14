@@ -2,6 +2,23 @@
 @landing2-primary-color: #DA4981;
 
 #landing2 {
+  // &.ant-layout {
+  //   background-color: transparent !important;
+  // }
+  .page-container {
+    padding-top: 100px;
+    // &::before {
+    //   content: ' ';
+    //   display: block;
+    //   width: 100%;
+    //   height: 300px;
+    //   position: absolute;
+    //   top: 0px;
+    //   left: 0px;
+    //   z-index: -1;
+    //   background: linear-gradient(178.48deg, #DA4981 8.77%, rgba(255, 255, 255, 0.4) 93.53%, rgba(255, 255, 255, 0) 122.56%);
+    // }
+  }
   .hero-section {
     background-position: bottom;
     .ant-typography {
@@ -24,7 +41,10 @@
     }
   }
   .themed-header {
-    background-color: transparent;
+    &.home {
+      background-color: transparent;
+    }
+    background-color: @landing2-primary-color;
     position: absolute;
     top: 0;
     width: 100%;

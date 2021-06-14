@@ -152,7 +152,7 @@ const CourseDetail = () => {
     return <Result status="error" title={'พบข้อผิดพลาด'} />
   }
   return (
-    <div class="container">
+    <div class="container page-container">
       <Breadcrumb>
         <Breadcrumb.Item>
           หน้าแรก
