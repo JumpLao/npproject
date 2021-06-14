@@ -15,11 +15,9 @@ import PopUpQuiz from '../../components/landing1/PopUpQuiz'
 import GoogleSheetDB from '../../utils/GoogleSheetDB'
 import RewardModal from '../../components/landing1/RewardModal'
 import EndTestModal from '../../components/landing1/EndTestModal'
+import { getRewardMode, REWARD_MODE } from '../../utils/ABTestingManager'
+import { useIdentity } from '../../contexts/IdentityContext'
 const googleSheetDB = new GoogleSheetDB()
-export const REWARD_MODE = {
-  PER_QUIZ: 'per quiz',
-  PER_QUESTION: 'per question'
-}
 const quizes = [
   {
     id: 1,
@@ -86,7 +84,7 @@ const quizes = [
 const CourseDetail = () => {
   const [player, setplayer] = useState()
   const [nextQuiz, setnextQuiz] = useState(0)
-  const [rewardMode, ] = useState(REWARD_MODE.PER_QUESTION)
+  const [rewardMode, setRewardMode] = useState(REWARD_MODE.PER_QUESTION)
   const popUpQuizRef = useRef()
   const rewardModalRef = useRef()
   const endTestModalRef = useRef()
@@ -96,6 +94,19 @@ const CourseDetail = () => {
   } = useAsync(() => {
     return googleSheetDB.auth()
   })
+  const {
+    id
+  } = useIdentity()
+  const {
+    loading: modeLoading,
+    error: modeError,
+    // value: theme
+  } = useAsync(async () => {
+    const rowIndex = await googleSheetDB.getRowIndex(id)
+    const mode = getRewardMode(rowIndex)
+    setRewardMode(mode)
+    return mode
+  }, [loading])
   useInterval(() => {
     if (!player) {
       return
@@ -134,11 +145,11 @@ const CourseDetail = () => {
     const player = event.target
     setplayer(player)
   }
-  if (loading) {
+  if (loading && modeLoading) {
     return <Skeleton />
   }
-  if (error) {
-    return <Result status="error" title={error.message} />
+  if (error  && modeError) {
+    return <Result status="error" title={'พบข้อผิดพลาด'} />
   }
   return (
     <div class="container">

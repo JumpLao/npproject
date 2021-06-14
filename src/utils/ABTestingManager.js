@@ -1,5 +1,8 @@
-import { REWARD_MODE } from "../pages/landing1/CourseDetail"
-
+// import { REWARD_MODE } from "../pages/landing1/CourseDetail"
+export const REWARD_MODE = {
+  PER_QUIZ: 'per quiz',
+  PER_QUESTION: 'per question'
+}
 const ABTestMode = [
   {
     theme: 'landing1',

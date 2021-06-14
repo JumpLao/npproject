@@ -1,4 +1,4 @@
-import { Col, Layout, Menu, Result, Row, Skeleton } from 'antd'
+import { Col, Layout, Menu, Result, Row, Skeleton, Typography } from 'antd'
 import Search from 'antd/lib/input/Search'
 import React from 'react'
 import logo from '../../images/landing1/logo.png'
@@ -9,12 +9,13 @@ import { Route, Switch, useRouteMatch } from 'react-router'
 import Home from './Home'
 import Course from './Course'
 import CourseDetail from './CourseDetail'
-import { useAsync } from 'react-use'
+import { useAsync, useLocation } from 'react-use'
 import GoogleSheetDB from '../../utils/GoogleSheetDB'
 import { useIdentity } from '../../contexts/IdentityContext'
 import { getTheme } from '../../utils/ABTestingManager'
 const googleSheetDB = new GoogleSheetDB()
 const LandingPage = () => {
+  const location = useLocation()
   const {
     id
   } = useIdentity()
@@ -31,7 +32,7 @@ const LandingPage = () => {
   } = useAsync(async () => {
     const rowIndex = await googleSheetDB.getRowIndex(id)
     return getTheme(rowIndex)
-  })
+  }, [loading])
   const route = useRouteMatch()
   if (loading || themeLoading) {
     return <Skeleton />
@@ -92,14 +93,18 @@ const LandingPage = () => {
             <Home theme={theme} />
           </Route>
         </Switch>
-        <Layout.Footer style={{backgroundColor: 'white'}}>
-          <div style={{textAlign:' center', borderBottom: '1px solid black', paddingBottom: 20}}>
-            <img width="160" src={logo} alt="logo"/>
+        <Layout.Footer
+          className={(location.pathname === '/landing1' || location.pathname === '/landing1/') && 'home'} 
+          style={{backgroundColor: 'white'}}
+        >
+          <div style={{textAlign:' center', paddingBottom: 20}}>
+            <img className="footer-logo" width="160" src={logo} alt="logo"/>
           </div>
+          <hr />
           <div style={{textAlign:' center', paddingTop: 20}}>
-            <span>
+            <Typography.Text>
               Learning | Growing up | Happiness
-            </span>
+            </Typography.Text>
           </div>
         </Layout.Footer>
       </Layout.Content>

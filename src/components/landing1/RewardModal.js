@@ -2,7 +2,7 @@ import { Modal, Result } from 'antd'
 import React, { useImperativeHandle, useState } from 'react'
 import reward from '../../images/landing1/reward.png'
 import reward2 from '../../images/landing1/reward2.png'
-import { REWARD_MODE } from '../../pages/landing1/CourseDetail'
+import { REWARD_MODE } from '../../utils/ABTestingManager'
 const RewardModal = ({
   className,
   player,

@@ -3,7 +3,7 @@ import { Form } from 'antd'
 import _ from 'lodash'
 import React, { useImperativeHandle, useState } from 'react'
 import { useIdentity } from '../../contexts/IdentityContext'
-import { REWARD_MODE } from '../../pages/landing1/CourseDetail'
+import { REWARD_MODE } from '../../utils/ABTestingManager'
 const PopUpQuiz = ({
   className,
   googleSheetDB,
