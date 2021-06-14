@@ -3,7 +3,7 @@ import React from 'react'
 import star from '../../images/landing1/star.png'
 import starActivated from '../../images/landing1/star_activated.png'
 import lock from '../../images/landing1/lock.png'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const CourseListItem = ({
   image,
@@ -14,9 +14,8 @@ const CourseListItem = ({
   locked,
   link
 }) => {
-  const route = useRouteMatch()
   return (
-    <Link to={link ? `${route.path}/${link}` : undefined}>
+    <Link to={link ? `/landing1/${link}` : undefined}>
       <Card
         hoverable
         className="course-list-item"
