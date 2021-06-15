@@ -53,12 +53,13 @@ const LandingPage = () => {
   }
   debugger
   return (
-    <Layout style={{height: '100%', backgroundColor: 'white'}} id={theme}>
+    <Layout style={{height: '100%', backgroundColor: 'transparent'}} id={theme}>
       <Layout.Header
         style={{zIndex: 1}}
         className={{
           'themed-header': true,
-          home: location.pathname === '/landing1' || location.pathname === '/landing1/'
+          home: location.pathname === '/landing1' || location.pathname === '/landing1/',
+          courses: location.pathname === '/landing1/courses' || location.pathname === '/landing1/courses/'
         }}
       >
         <Row justify="space-between">
@@ -111,7 +112,10 @@ const LandingPage = () => {
           </Route>
         </Switch>
         <Layout.Footer
-          className={(location.pathname === '/landing1' || location.pathname === '/landing1/') && 'home'} 
+          className={{
+            home: location.pathname === '/landing1' || location.pathname === '/landing1/',
+            courses: location.pathname === '/landing1/courses' || location.pathname === '/landing1/courses/'
+          }}
           style={{backgroundColor: 'white'}}
         >
           <div style={{textAlign:' center', paddingBottom: 20}}>

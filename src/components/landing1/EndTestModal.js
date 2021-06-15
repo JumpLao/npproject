@@ -16,6 +16,7 @@ const EndTestModal = ({
     }),
   )
   const openModal = (quiz) => {
+    player.pauseVideo()
     setvisible(true)
   }
   const handleClose = () => {
