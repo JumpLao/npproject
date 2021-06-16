@@ -59,7 +59,7 @@ const HomePage = () => {
                     </strong>
                   </div>
                   <div style={{display: 'inline-block', marginTop: 8}}>
-                    <img src={authorimg} alt="author" style={{borderRadius: '50%', display: 'inline-block'}}/>
+                    <img src={authorimg} alt="author" style={{width: 100, display: 'inline-block'}}/>
                     <div style={{textAlign: 'left', paddingLeft: 12, display: 'inline-block'}}>
                       <strong>สุพิชญา ศรีทองจรัสกุล</strong><br/>
                       <small>np.supichaya@gmail.com</small>

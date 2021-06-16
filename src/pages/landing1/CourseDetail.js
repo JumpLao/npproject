@@ -84,7 +84,8 @@ const quizes = [
 const CourseDetail = () => {
   const [player, setplayer] = useState()
   const [nextQuiz, setnextQuiz] = useState(0)
-  const [rewardMode, setRewardMode] = useState(REWARD_MODE.PER_QUESTION)
+  const [interval, setinterval] = useState(1000)
+  // const [rewardMode, setRewardMode] = useState(REWARD_MODE.PER_QUESTION)
   const popUpQuizRef = useRef()
   const rewardModalRef = useRef()
   const endTestModalRef = useRef()
@@ -100,13 +101,18 @@ const CourseDetail = () => {
   const {
     loading: modeLoading,
     error: modeError,
-    // value: theme
+    value: rewardMode
   } = useAsync(async () => {
     const rowIndex = await googleSheetDB.getRowIndex(id)
     const mode = getRewardMode(rowIndex)
-    setRewardMode(mode)
+    // setRewardMode(mode)
     return mode
   }, [loading])
+  useAsync(async () => {
+    await googleSheetDB.save(id, {
+      rewardMode
+    })
+  }, [rewardMode])
   useInterval(() => {
     if (!player) {
       return
@@ -115,23 +121,35 @@ const CourseDetail = () => {
     const currentTime = player.getCurrentTime()
     console.log(currentTime)
     // if (currentTime >= nextQuiz + 1) {
-    if (currentTime >= quizes[nextQuiz].time) {
-      if (nextQuiz > quizes.length - 1) {
-        // end quiz
-        // open finish quiz modal
-        if (rewardMode === REWARD_MODE.PER_QUIZ){
-          showRewardModal()
-          return
-        }
-        showEndTestModal()
+    if (!quizes[nextQuiz]) {
+      // all question has been pass
+      setinterval(null)
+      if (rewardMode === REWARD_MODE.PER_QUIZ){
+        showRewardModal()
         return
       }
+      showEndTestModal()
+      return
+    }
+    if (currentTime >= quizes[nextQuiz].time) {
+      // if (nextQuiz > quizes.length - 1) {
+      //   // end quiz
+      //   // open finish quiz modal
+      //   if (rewardMode === REWARD_MODE.PER_QUIZ){
+      //     showRewardModal()
+      //     return
+      //   }
+      //   showEndTestModal()
+      //   return
+      // }
       // open quiz modal with next quiz
       player.pauseVideo()
       openModal(quizes[nextQuiz])
-      setnextQuiz((nextQuiz) => nextQuiz + 1)
     }
-  }, 1000)
+  }, interval)
+  const nextQuestion = () => {
+    setnextQuiz((nextQuiz) => nextQuiz + 1)
+  }
   const openModal = (quiz) => {
     popUpQuizRef.current.open(quiz)
   }
@@ -152,7 +170,7 @@ const CourseDetail = () => {
     return <Result status="error" title={'พบข้อผิดพลาด'} />
   }
   return (
-    <div class="container page-container">
+    <div className="container page-container">
       <Breadcrumb>
         <Breadcrumb.Item>
           หน้าแรก
@@ -259,10 +277,10 @@ const CourseDetail = () => {
           </div>
         </Tabs.TabPane>
         <Tabs.TabPane key="2" tab="รีวิว">
-          <Result icon={<img width="120" src={errorImg} alt="error" />} title="พบกับฟีเจอร์รีวิวได้ในเร็วๆนี้" />
+          <Result className="comingsoonreview" icon={<img width="120" src={errorImg} alt="error" />} title="พบกับฟีเจอร์รีวิวได้ในเร็วๆนี้" />
         </Tabs.TabPane>
         <Tabs.TabPane key="3" tab="ห้องสนทนา">
-        <Result icon={<img width="120" src={errorImg} alt="error" />} title="พบกับฟีเจอร์ห้องสนทนาได้ในเร็ว ๆ นี้" />
+        <Result className="comingsoonchat" icon={<img width="120" src={errorImg} alt="error" />} title="พบกับฟีเจอร์ห้องสนทนาได้ในเร็ว ๆ นี้" />
         </Tabs.TabPane>
       </Tabs>
       <Typography.Title level={3}>
@@ -279,9 +297,9 @@ const CourseDetail = () => {
           })
         }
       </Row>
-      <PopUpQuiz ref={popUpQuizRef} player={player} className={'landing1-theme'} googleSheetDB={googleSheetDB} rewardMode={rewardMode} showRewardModal={showRewardModal}/>
+      <PopUpQuiz ref={popUpQuizRef} player={player} className={'landing1-theme'} googleSheetDB={googleSheetDB} rewardMode={rewardMode} showRewardModal={showRewardModal} nextQuestion={nextQuestion}/>
       <RewardModal ref={rewardModalRef} player={player} className={'landing1-theme'} showEndTestModal={showEndTestModal} rewardMode={rewardMode} />
-      <EndTestModal ref={endTestModalRef} />
+      <EndTestModal ref={endTestModalRef} player={player} />
     </div>
   )
 }

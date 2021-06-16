@@ -14,11 +14,12 @@ import GoogleSheetDB from '../../utils/GoogleSheetDB'
 import { useIdentity } from '../../contexts/IdentityContext'
 import { getTheme } from '../../utils/ABTestingManager'
 import qs from 'qs'
+import { Link } from 'react-router-dom'
+import NotFound from '../NotFound'
 
 const googleSheetDB = new GoogleSheetDB()
 const LandingPage = () => {
   const location = useLocation()
-  
   const {
     id
   } = useIdentity()
@@ -44,6 +45,11 @@ const LandingPage = () => {
     const rowIndex = await googleSheetDB.getRowIndex(id)
     return getTheme(rowIndex)
   }, [loading])
+  useAsync(async () => {
+    await googleSheetDB.save(id, {
+      theme
+    })
+  }, [theme])
   const route = useRouteMatch()
   if (loading || themeLoading) {
     return <Skeleton />
@@ -59,7 +65,7 @@ const LandingPage = () => {
         className={{
           'themed-header': true,
           home: location.pathname === '/landing1' || location.pathname === '/landing1/',
-          courses: location.pathname === '/landing1/courses' || location.pathname === '/landing1/courses/'
+          courses: location.pathname === '/landing1/courses' || location.pathname === '/landing1/courses/',
         }}
       >
         <Row justify="space-between">
@@ -79,10 +85,26 @@ const LandingPage = () => {
             <Row style={{flexWrap: 'nowrap'}}>
               <Col>
                 <Menu className="themed-menu" theme="light" mode="horizontal">
-                  <Menu.Item key="1">คอร์สเรียน</Menu.Item>
-                  <Menu.Item key="2">ตารางกิจกรร</Menu.Item>
-                  <Menu.Item key="3">แบบทดสอบ</Menu.Item>
-                  <Menu.Item key="4">ระบบวิจัย</Menu.Item>
+                  <Menu.Item key="1">
+                    <Link to="/landing1/courses">
+                      คอร์สเรียน
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Link to="/schedule">
+                      ตารางกิจกรรม
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Link to="/test">
+                      แบบทดสอบ
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to="/research">
+                      ระบบวิจัย
+                    </Link>
+                  </Menu.Item>
                 </Menu>
               </Col>
               <Col>
@@ -99,7 +121,7 @@ const LandingPage = () => {
           </Col>
         </Row>
       </Layout.Header>
-      <Layout.Content style={{overflow: 'auto'}}>
+      <Layout.Content>
         <Switch>
           <Route path={`${route.path}/courses`} exact>
             <Course />
@@ -107,8 +129,11 @@ const LandingPage = () => {
           <Route path={`${route.path}/courses/:id`} exact>
             <CourseDetail />
           </Route>
-          <Route>
+          <Route path={`${route.path}`} exact>
             <Home theme={theme} />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
         <Layout.Footer
@@ -118,15 +143,22 @@ const LandingPage = () => {
           }}
           style={{backgroundColor: 'white'}}
         >
-          <div style={{textAlign:' center', paddingBottom: 20}}>
-            <img className="footer-logo" width="160" src={logo} alt="logo"/>
-          </div>
-          <hr />
-          <div style={{textAlign:' center', paddingTop: 20}}>
-            <Typography.Text>
-              Learning | Growing up | Happiness
-            </Typography.Text>
-          </div>
+          <Row>
+            <Col flex="auto" className="footerleft">
+            </Col>
+            <Col>
+              <div style={{textAlign:' center', paddingBottom: 20}}>
+                <img className="footer-logo" width="160" src={logo} alt="logo"/>
+              </div>
+              <hr />
+              <div style={{textAlign:' center', paddingTop: 20}}>
+                <Typography.Text>
+                  Learning | Growing up | Happiness
+                </Typography.Text>
+              </div>
+            </Col>
+            <Col flex="auto" className="footerright"></Col>
+          </Row>
         </Layout.Footer>
       </Layout.Content>
     </Layout>

@@ -47,6 +47,9 @@
     &.courses {
       background-color: transparent;
     }
+    &.scrolled {
+      background-color: @landing2-primary-color;
+    }
     background-color: @landing2-primary-color;
     position: absolute;
     top: 0;
@@ -72,7 +75,14 @@
   .themed-menu{
     background-color: transparent;
     border-bottom: none;
-    color: white;
+    .ant-menu-item {
+      &.ant-menu-item-active {
+        border-bottom: 2px solid transparent !important;
+      }
+    }
+    a {
+      color: white;
+    }
   }
   .course-list-item {
     text-align: left !important;
@@ -146,6 +156,7 @@
     }
   }
   .ant-layout-footer {
+    padding: 0px;
     &.home{
       background-image: url('../images/landing2/footerbg.png');
       background-repeat: no-repeat;
@@ -157,6 +168,18 @@
       }
       .ant-typography {
         color: white;
+      }
+    }
+    &:not(.home) {
+      .footerleft {
+        background-image: url(../images/landing2/footerleft.png);
+        background-position: top right;
+        background-size: cover;
+      }
+      .footerright {
+        background-image: url(../images/landing2/footerright.png);
+        background-position: top left;
+        background-size: cover;
       }
     }
     hr {
@@ -225,6 +248,18 @@
           color: white;
         }
       }
+    }
+  }
+  .comingsoonreview {
+    img[alt=error] {
+      width: 240px;
+      content: url(../images/landing2/comingsoonreview.png);
+    }
+  }
+  .comingsoonchat {
+    img[alt=error] {
+      width: 240px;
+      content: url(../images/landing2/comingsoonchat.png);
     }
   }
 }

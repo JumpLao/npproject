@@ -5,6 +5,7 @@ import author from '../../images/landing1/author.png'
 import prev from '../../images/landing1/prevarrow.png'
 import next from '../../images/landing1/nextarrow.png'
 import ButtonWithArrow from './ButtonWithArrow'
+import { Link } from 'react-router-dom'
 const TestimonialSection = () => {
   return (
     <div>
@@ -65,9 +66,11 @@ const TestimonialSection = () => {
               </div>
             </div>
             <div style={{textAlign: 'center', paddingTop: 40}}>
-              <ButtonWithArrow>
-                เรียนเลย
-              </ButtonWithArrow>
+              <Link to="/landing1/courses/1">
+                <ButtonWithArrow>
+                  เรียนเลย
+                </ButtonWithArrow>
+              </Link>
             </div>
           </div>
         </div>

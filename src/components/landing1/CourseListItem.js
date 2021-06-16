@@ -26,7 +26,7 @@ const CourseListItem = ({
             {
               locked && <img alt="lock" src={lock} style={{position: 'absolute', top: '50%', left: '50%', margin: -12, width: 24, height: 24}}/>
             }
-            <img alt="example" src={image} />
+            <img alt="example" src={image} style={{width: '100%'}}/>
           </div>
         )}
       >

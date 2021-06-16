@@ -6,7 +6,7 @@ import GoogleSheetDB from '../utils/GoogleSheetDB.js'
 import { useAsync } from 'react-use'
 import { useIdentity } from '../contexts/IdentityContext'
 const options = [
-  'มีอายุระหว่าง 18-25 ปี',
+  'มีอายุระหว่าง 18-35 ปี',
   'ฟัง พูด อ่าน เขียน ภาษาไทยได้',
   'รับทราบว่าข้อมูลและคำตอบจะถูกบันทึกโดยไม่ระบุตัวตน',
   'ต้องการเรียนคอร์ส "ทำยังไงในวันที่ใจเหนื่อย" บนเว็บไซต์นี้ ',

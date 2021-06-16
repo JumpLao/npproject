@@ -9,7 +9,8 @@ const PopUpQuiz = ({
   googleSheetDB,
   player,
   rewardMode,
-  showRewardModal
+  showRewardModal,
+  nextQuestion
 }, ref) => {
   const [visible, setvisible] = useState(false)
   const [quiz, setquiz] = useState()
@@ -38,6 +39,7 @@ const PopUpQuiz = ({
         return
       }
       setvisible(false)
+      nextQuestion()
       player.playVideo()
       return
     } catch (e) {

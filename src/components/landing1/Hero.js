@@ -1,5 +1,6 @@
 import { Col, Row, Typography } from 'antd'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import bg from '../../images/landing1/cover.png'
 import bg2 from '../../images/landing2/cover.png'
 import ButtonWithArrow from './ButtonWithArrow'
@@ -23,11 +24,15 @@ const Hero = ({
               </Typography.Text>
             </div>
             <div style={{paddingTop: 12}}>
-              <ButtonWithArrow>เรียนเลย</ButtonWithArrow>
+              <Link to="/landing1/courses/1">
+                <ButtonWithArrow>
+                  เรียนเลย
+                </ButtonWithArrow>
+              </Link>
             </div>
           </Col>
           <Col xs={24} lg={10}>
-            <img style={{width: '100%'}} src={require('../../images/landing2/hero.png')} alt="img" />
+            <img className="hero-img" style={{width: '100%'}} src={require('../../images/landing2/hero.png')} alt="img" />
           </Col>
         </Row>
       </div>
