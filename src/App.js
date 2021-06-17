@@ -18,7 +18,7 @@ const App = () => (
   <IdentityContextProvider>
     <Router>
       <Switch>
-        <Route path="/home" exact>
+        <Route path="/home">
           <HomePage />
         </Route>
         <Route path="/landing1">
@@ -27,7 +27,7 @@ const App = () => (
         <Route path="/questionair">
           <QuestionairPage />
         </Route>
-        <Route path="/" exact>
+        <Route path="" exact>
           <Redirect to="/home" />
         </Route>
         <Route>
