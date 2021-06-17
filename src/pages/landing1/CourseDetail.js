@@ -143,11 +143,13 @@ const CourseDetail = () => {
       //   return
       // }
       // open quiz modal with next quiz
+      setinterval(null)
       player.pauseVideo()
       openModal(quizes[nextQuiz])
     }
   }, interval)
   const nextQuestion = () => {
+    setinterval(1000)
     setnextQuiz((nextQuiz) => nextQuiz + 1)
   }
   const openModal = (quiz) => {
