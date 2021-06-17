@@ -36,6 +36,7 @@ const PopUpQuiz = ({
       if (rewardMode === REWARD_MODE.PER_QUESTION) {
         setvisible(false)
         showRewardModal()
+        nextQuestion()
         return
       }
       setvisible(false)
