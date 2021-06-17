@@ -27,7 +27,7 @@ const Form3 = () => {
       notification.success({
         message: 'บันทึกข้อมูลสำเร็จ'
       })
-      history.push('/questionair/debrief')
+      history.push('/debrief')
     } catch (e) {
       console.log(e)
       notification.error({
