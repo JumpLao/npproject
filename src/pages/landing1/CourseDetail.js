@@ -301,7 +301,7 @@ const CourseDetail = () => {
         }
       </Row>
       <PopUpQuiz ref={popUpQuizRef} player={player} className={'landing1-theme'} googleSheetDB={googleSheetDB} rewardMode={rewardMode} showRewardModal={showRewardModal} nextQuestion={nextQuestion}/>
-      <RewardModal ref={rewardModalRef} player={player} className={'landing1-theme'} showEndTestModal={showEndTestModal} rewardMode={rewardMode} />
+      <RewardModal ref={rewardModalRef} player={player} className={'landing1-theme'} showEndTestModal={showEndTestModal} rewardMode={rewardMode} nextQuestion={nextQuestion}/>
       <EndTestModal ref={endTestModalRef} player={player} />
     </div>
   )

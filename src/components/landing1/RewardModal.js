@@ -7,7 +7,8 @@ const RewardModal = ({
   className,
   player,
   rewardMode,
-  showEndTestModal
+  showEndTestModal,
+  nextQuestion
 }, ref) => {
   const [visible, setvisible] = useState(false)
   useImperativeHandle(
@@ -26,6 +27,7 @@ const RewardModal = ({
       showEndTestModal()
       return
     }
+    nextQuestion()
     player.playVideo()
   }
   if (rewardMode === REWARD_MODE.PER_QUIZ) {
