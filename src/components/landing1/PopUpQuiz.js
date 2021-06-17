@@ -40,7 +40,9 @@ const PopUpQuiz = ({
       }
       setvisible(false)
       nextQuestion()
-      player.playVideo()
+      if (rewardMode === REWARD_MODE.PER_QUESTION) {
+        player.playVideo()
+      }
       return
     } catch (e) {
       console.log(e)

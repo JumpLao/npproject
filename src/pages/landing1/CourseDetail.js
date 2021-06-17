@@ -49,8 +49,8 @@ const quizes = [
     choices: [
       'หลักการพื้นฐานของการฝึกให้มี mindfulness คือ ฝึกสังเกตการเปลี่ยนแปลงที่เกิดขึ้นกับร่างกาย และฝึกเพ่งความสนใจไปที่สิ่งสิ่งนั้น',
       'เป็นความสามารถในการรับรู้ตนเองในปัจจุบันขณะหรือการมีสติ',
-      'ความเชื่อมั่นในการเปลี่ยนแปลงและโอกาส (I will)',
-      'ทักษะความสามารถในการแก้ปัญหา (I can)'
+      'เป็นความสามารถในการตระหนักถึงคุณค่าของสิ่งที่มี รู้สึกสุขใจกับสิ่งที่ได้รับมา',
+      'เมื่อรู้เท่าทันสิ่งที่เกิดขึ้นได้รวดเร็วก็จะทำให้จัดการกับตนเองได้ดียิ่งขึ้น อยู่กับปัจจุบันได้มากขึ้น'
     ],
     time: 11*60 + 37
     // time: 0
@@ -131,7 +131,8 @@ const CourseDetail = () => {
       showEndTestModal()
       return
     }
-    if (currentTime >= quizes[nextQuiz].time) {
+    const nextPopuptime = rewardMode === REWARD_MODE.PER_QUESTION ? quizes[nextQuiz].time : (20*60 + 18)
+    if (currentTime >= nextPopuptime) {
       // if (nextQuiz > quizes.length - 1) {
       //   // end quiz
       //   // open finish quiz modal
