@@ -1,7 +1,7 @@
 import { Col, Layout, Row, Typography } from 'antd'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
-import DebriefPage from './questionair/DebriefPage'
+// import DebriefPage from './questionair/DebriefPage'
 import Form1 from './questionair/Form1'
 import Form2 from './questionair/Form2'
 import Form3 from './questionair/Form3'
