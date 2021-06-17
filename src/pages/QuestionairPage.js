@@ -32,9 +32,6 @@ const QuestionairPage = () => {
             <Route path="/questionair/3">
               <Form3 />
             </Route>
-            <Route path="/questionair/debrief">
-              <DebriefPage />
-            </Route>
             <Route>
               <Redirect to="/questionair/1" />
             </Route>

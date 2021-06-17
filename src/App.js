@@ -13,6 +13,7 @@ import IdentityContextProvider from './contexts/IdentityContext';
 import HomePage from './pages/HomePage';
 import LandingPage1 from './pages/landing1/Layout';
 import QuestionairPage from './pages/QuestionairPage';
+import DebriefPage from './pages/questionair/DebriefPage';
 
 const App = () => (
   <IdentityContextProvider>
@@ -27,7 +28,10 @@ const App = () => (
         <Route path="/questionair">
           <QuestionairPage />
         </Route>
-        <Route path="" exact>
+        <Route path="/debrief">
+          <DebriefPage />
+        </Route>
+        <Route path="/" exact>
           <Redirect to="/home" />
         </Route>
         <Route>
