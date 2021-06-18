@@ -67,7 +67,7 @@ const Form3 = () => {
                   </Row>
                   <Row style={{paddingBottom: 40}}>
                     <Col xs={24}>
-                      <Form.Item name={question} labelCol={0} rules={[{required: true}]}>
+                      <Form.Item name={question} labelCol={0}>
                         <Input.TextArea rows={5}/>
                       </Form.Item>
                     </Col>
@@ -79,7 +79,7 @@ const Form3 = () => {
         }
         <Form.Item style={{paddingTop: 40}}>
           <Button type="primary" htmlType="submit">
-            ถัดไป
+            ส่งคำตอบ
           </Button>
         </Form.Item>
       </Form>
